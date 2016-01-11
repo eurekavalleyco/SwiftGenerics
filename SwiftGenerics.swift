@@ -6,6 +6,8 @@
 //  Copyright © 2016 MCMDI. All rights reserved.
 //
 
+import Dispatch
+
 func optionalOr(whereNil boolForNil: Bool, args: Bool?...) -> Bool! {
     for arg: Bool? in args {
         if (arg == nil) {
@@ -44,4 +46,13 @@ func nonNil(args: AnyObject?...) -> AnyObject? {
     }
     
     return nil;
+}
+
+func delay(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
 }
